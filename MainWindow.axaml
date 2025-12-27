@@ -2,8 +2,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:ArchiveApp.views"
+        xmlns:archiveApp="clr-namespace:ArchiveApp"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ArchiveApp.MainWindow"
-        Title="ArchiveApp">
-    Welcome to Avalonia!
+        Title="ArchiveApp"
+        x:DataType="archiveApp:MainWindow">
+    
+    <Grid ShowGridLines="True" RowDefinitions="Auto, *">
+            <Grid Grid.Row="0" ShowGridLines="True" ColumnDefinitions="Auto, *, Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
+                    <Button Name="Back">B</Button>
+                    <Button Name="Forward">F</Button>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TabControl ItemsSource="{Binding Tabs}">
+                        <TabControl.ContentTemplate>
+                            <DataTemplate>
+                                <!-- Intentionally empty -->
+                            </DataTemplate>
+                        </TabControl.ContentTemplate>
+                        
+                        <TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center"></TextBlock>
+                                    <Button Name="CloseTabButton"
+                                            VerticalAlignment="Center"
+                                            FontSize="12"
+                                            FontWeight="Bold"
+                                            Margin="5,0,0,0"
+                                            IsVisible="{Binding
+                                                RelativeSource={RelativeSource AncestorType=TabItem},
+                                                Path=IsSelected}"
+                                            Click="CloseTabButton_OnClick">x</Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </TabControl.ItemTemplate>
+                    </TabControl>
+                    <Button Name="NewTabButton" Click="NewTabButton_OnClick">New Tab</Button>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button>Settings</Button>
+                </StackPanel>
+            </Grid>
+            
+            <ContentControl Grid.Row="1">
+                <views:GalleryView></views:GalleryView>
+            </ContentControl>
+        </Grid>
 </Window>

@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ArchiveApp.views.GalleryView">
+    
+    <Grid Name="TabContent" RowDefinitions="*, Auto">
+        <Grid Grid.Row="0" ShowGridLines="True" ColumnDefinitions="Auto, *, Auto">
+            <Label Grid.Column="0">search controls</Label>
+            <Grid Name="Pictures" Grid.Column="1" ShowGridLines="True" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *" >
+                <Image Grid.Row="0" Grid.Column="0" Margin="5" Source="C:\Users\karol\Pictures\desktop backgrounds\planets-space-person-stars.jpg"></Image>
+            </Grid>
+        </Grid>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="3" HorizontalAlignment="Center">
+            <Button>B</Button>
+            <Button>1</Button>
+            <Button>cur-1</Button>
+            <Button>cur</Button>
+            <Button>cur+1</Button>
+            <Button>last</Button>
+            <Button>F</Button>
+        </StackPanel>
+    </Grid>
+    
+</UserControl>
