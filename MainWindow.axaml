@@ -12,37 +12,44 @@
     <Grid ShowGridLines="True" RowDefinitions="Auto, *">
             <Grid Grid.Row="0" ShowGridLines="True" ColumnDefinitions="Auto, *, Auto">
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
-                    <Button Name="Back">B</Button>
-                    <Button Name="Forward">F</Button>
+                    <Button Name="BackButton">B</Button>
+                    <Button Name="ForwardButton">F</Button>
                 </StackPanel>
                 
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <TabControl ItemsSource="{Binding Tabs}">
-                        <TabControl.ContentTemplate>
-                            <DataTemplate>
-                                <!-- Intentionally empty -->
-                            </DataTemplate>
-                        </TabControl.ContentTemplate>
+                <ScrollViewer Name="TabScrollViewer"
+                              Classes="tab-scroll"
+                              Grid.Column="1"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Disabled"
+                              PointerWheelChanged="TabScrollBar_OnPointerWheelChanged">
+                    <StackPanel Orientation="Horizontal">
+                        <TabControl Name="TabControl" ItemsSource="{Binding Tabs}">
+                            <TabControl.ContentTemplate>
+                                <DataTemplate>
+                                    <!-- Intentionally empty -->
+                                </DataTemplate>
+                            </TabControl.ContentTemplate>
                         
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding}" VerticalAlignment="Center"></TextBlock>
-                                    <Button Name="CloseTabButton"
-                                            VerticalAlignment="Center"
-                                            FontSize="12"
-                                            FontWeight="Bold"
-                                            Margin="5,0,0,0"
-                                            IsVisible="{Binding
-                                                RelativeSource={RelativeSource AncestorType=TabItem},
-                                                Path=IsSelected}"
-                                            Click="CloseTabButton_OnClick">x</Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                    </TabControl>
-                    <Button Name="NewTabButton" Click="NewTabButton_OnClick">New Tab</Button>
-                </StackPanel>
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding}" VerticalAlignment="Center"></TextBlock>
+                                        <Button Name="CloseTabButton"
+                                                VerticalAlignment="Center"
+                                                FontSize="12"
+                                                FontWeight="Bold"
+                                                Margin="5,0,0,0"
+                                                IsVisible="{Binding
+                                                    RelativeSource={RelativeSource AncestorType=TabItem},
+                                                    Path=IsSelected}"
+                                                Click="CloseTabButton_OnClick">x</Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                        </TabControl>
+                        <Button Name="NewTabButton" Click="NewTabButton_OnClick">New Tab</Button>
+                    </StackPanel>
+                </ScrollViewer>
                 
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <Button>Settings</Button>
