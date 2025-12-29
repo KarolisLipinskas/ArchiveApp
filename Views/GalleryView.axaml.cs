@@ -2,7 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace ArchiveApp.views;
+namespace ArchiveApp.Views;
 
 public partial class GalleryView : UserControl
 {
