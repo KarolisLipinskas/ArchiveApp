@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -9,11 +10,35 @@ using Avalonia.Threading;
 
 namespace ArchiveApp;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window, INotifyPropertyChanged
 {
+    public new event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged(string propertyName)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    
     public ObservableCollection<string> Tabs { get; } = [InitialTab];
     private int _nextTabNo = 2;
     private const string InitialTab = "Tab1";
+    private bool _showMoreControls;
+    public bool ShowMoreControls
+    {
+        get => _showMoreControls;
+        set
+        {
+            _showMoreControls = value;
+            OnPropertyChanged(nameof(ShowMoreControls));
+        }
+    }
+    private bool _showMoreControlsButton = true;
+    public bool ShowMoreControlsButton 
+    { 
+        get => _showMoreControlsButton;
+        set
+        {
+            _showMoreControlsButton = value;
+            OnPropertyChanged(nameof(ShowMoreControlsButton));
+        }
+    }
 
     public MainWindow()
     {
@@ -82,5 +107,19 @@ public partial class MainWindow : Window
         
         scrollViewer.Offset = scrollViewer.Offset.WithX(scrollViewer.Offset.X - e.Delta.Y * 40);
         e.Handled = true;
+    }
+
+    private void MoreControlsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ShowMoreControls = true;
+        ShowMoreControlsButton = false;
+        Console.WriteLine(ShowMoreControls);
+    }
+    
+    private void HideControlsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ShowMoreControls = false;
+        ShowMoreControlsButton = true;
+        Console.WriteLine(ShowMoreControls);
     }
 }

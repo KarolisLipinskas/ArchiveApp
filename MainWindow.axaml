@@ -57,7 +57,31 @@
             </Grid>
             
             <ContentControl Grid.Row="1">
-                <views:GalleryView></views:GalleryView>
+                <Grid ShowGridLines="True" ColumnDefinitions="Auto, *">
+                    <Grid Grid.Column="0" ShowGridLines="True" RowDefinitions="Auto, Auto">
+                        <StackPanel Grid.Row="0" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="Search" Width="150" Watermark="Search..."></TextBox>
+                                <Button>S</Button>
+                            </StackPanel>
+                            <Button Name="MoreControlsButton" Margin="0,5" Click="MoreControlsButton_OnClick" IsVisible="{Binding ShowMoreControlsButton}">More Controls</Button>
+                            <StackPanel IsVisible="{Binding ShowMoreControls}">
+                                <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                                    <Label>Date From</Label>
+                                    <DatePicker></DatePicker>
+                                    <Button>x</Button>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label>Date To</Label>
+                                    <DatePicker></DatePicker>
+                                    <Button>x</Button>
+                                </StackPanel>
+                                <Button Name="HideControlsButton" Margin="0,5" Click="HideControlsButton_OnClick">Hide Controls</Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <views:GalleryView Grid.Column="1"></views:GalleryView>
+                </Grid>
             </ContentControl>
         </Grid>
 </Window>
