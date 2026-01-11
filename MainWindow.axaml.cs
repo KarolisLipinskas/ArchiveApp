@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -9,11 +10,25 @@ using Avalonia.Threading;
 
 namespace ArchiveApp;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window, INotifyPropertyChanged
 {
+    public new event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged(string propertyName)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    
     public ObservableCollection<string> Tabs { get; } = [InitialTab];
     private int _nextTabNo = 2;
     private const string InitialTab = "Tab1";
+    private bool _showMoreControls;
+    public bool ShowMoreControls
+    {
+        get => _showMoreControls;
+        set
+        {
+            _showMoreControls = value;
+            OnPropertyChanged(nameof(ShowMoreControls));
+        }
+    }
 
     public MainWindow()
     {
@@ -27,7 +42,10 @@ public partial class MainWindow : Window
         {
             await Dispatcher.UIThread.InvokeAsync(callback, priority);
         }
-        catch {  /* IGNORED */ }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
     
     private void ScrollTabsToEnd()
@@ -82,5 +100,25 @@ public partial class MainWindow : Window
         
         scrollViewer.Offset = scrollViewer.Offset.WithX(scrollViewer.Offset.X - e.Delta.Y * 40);
         e.Handled = true;
+    }
+
+    private void MoreControlsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ShowMoreControls = true;
+    }
+    
+    private void HideControlsButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ShowMoreControls = false;
+    }
+
+    private void ClearDateFromButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+         FromDatePicker.Clear();
+    }
+
+    private void ClearDateToButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ToDatePicker.Clear();
     }
 }

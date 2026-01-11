@@ -6,11 +6,8 @@
              x:Class="ArchiveApp.Views.GalleryView">
     
     <Grid Name="TabContent" RowDefinitions="*, Auto">
-        <Grid Grid.Row="0" ShowGridLines="True" ColumnDefinitions="Auto, *, Auto">
-            <Label Grid.Column="0">search controls</Label>
-            <Grid Name="Pictures" Grid.Column="1" ShowGridLines="True" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *" >
-                <Image Grid.Row="0" Grid.Column="0" Margin="5" Source="C:\Users\karol\Pictures\desktop backgrounds\planets-space-person-stars.jpg"></Image>
-            </Grid>
+        <Grid Name="Pictures" ShowGridLines="True" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *" >
+            <Image Grid.Row="0" Grid.Column="0" Margin="5" Source="C:\Users\karol\Pictures\desktop backgrounds\planets-space-person-stars.jpg"></Image>
         </Grid>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="3" HorizontalAlignment="Center">
