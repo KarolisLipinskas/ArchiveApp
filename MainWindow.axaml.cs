@@ -29,16 +29,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(ShowMoreControls));
         }
     }
-    private bool _showMoreControlsButton = true;
-    public bool ShowMoreControlsButton 
-    { 
-        get => _showMoreControlsButton;
-        set
-        {
-            _showMoreControlsButton = value;
-            OnPropertyChanged(nameof(ShowMoreControlsButton));
-        }
-    }
 
     public MainWindow()
     {
@@ -52,7 +42,10 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             await Dispatcher.UIThread.InvokeAsync(callback, priority);
         }
-        catch {  /* IGNORED */ }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
     
     private void ScrollTabsToEnd()
@@ -112,14 +105,20 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private void MoreControlsButton_OnClick(object? sender, RoutedEventArgs e)
     {
         ShowMoreControls = true;
-        ShowMoreControlsButton = false;
-        Console.WriteLine(ShowMoreControls);
     }
     
     private void HideControlsButton_OnClick(object? sender, RoutedEventArgs e)
     {
         ShowMoreControls = false;
-        ShowMoreControlsButton = true;
-        Console.WriteLine(ShowMoreControls);
+    }
+
+    private void ClearDateFromButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+         FromDatePicker.Clear();
+    }
+
+    private void ClearDateToButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ToDatePicker.Clear();
     }
 }
