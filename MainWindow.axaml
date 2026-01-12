@@ -12,7 +12,7 @@
     <Grid ShowGridLines="True" RowDefinitions="Auto, *">
             <Grid Grid.Row="0" ShowGridLines="True" ColumnDefinitions="Auto, *, Auto">
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5">
-                    <Button Name="BackButton">B</Button>
+                    <Button Name="BackButton" Click="BackButton_OnClick">B</Button>
                     <Button Name="ForwardButton">F</Button>
                 </StackPanel>
                 
@@ -80,7 +80,8 @@
                             </StackPanel>
                         </StackPanel>
                     </Grid>
-                    <views:GalleryView Grid.Column="1"></views:GalleryView>
+                    <views:GalleryView Grid.Column="1" IsVisible="{Binding !ShowItem}"></views:GalleryView>
+                    <views:ItemView Name="ViewsItemView" Grid.Column="1" IsVisible="{Binding ShowItem}"></views:ItemView>
                 </Grid>
             </ContentControl>
         </Grid>

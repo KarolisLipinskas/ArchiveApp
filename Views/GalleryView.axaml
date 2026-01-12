@@ -2,13 +2,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:archiveApp="clr-namespace:ArchiveApp"
+             xmlns:classes="clr-namespace:ArchiveApp.Classes"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ArchiveApp.Views.GalleryView">
     
-    <Grid Name="TabContent" RowDefinitions="*, Auto">
-        <Grid Name="Pictures" ShowGridLines="True" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *" >
-            <Image Grid.Row="0" Grid.Column="0" Margin="5" Source="C:\Users\karol\Pictures\desktop backgrounds\planets-space-person-stars.jpg"></Image>
-        </Grid>
+    <Grid Name="TabContentGallery" RowDefinitions="*, Auto">
+        
+        <ItemsControl Grid.Row="0" ItemsSource="{Binding Images, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!-- <Grid Name="Pictures" ShowGridLines="True" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *"></Grid> -->
+                    <!-- <UniformGrid Rows="5" Columns="6"></UniformGrid> -->
+                    <classes:GalleryGrid Rows="5" Columns="6"></classes:GalleryGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Margin="5" RenderOptions.BitmapInterpolationMode="MediumQuality" RenderOptions.BitmapBlendingMode="Source" Source="{Binding}" PointerPressed="Item_OnPointerPressed"></Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
+        <!-- <Grid Name="Pictures" ShowGridLines="True" RowDefinitions="*, *, *, *, *" ColumnDefinitions="*, *, *, *, *, *" >
+            <Image Name="Item00" Grid.Row="0" Grid.Column="0" Margin="5" PointerPressed="Item00_OnPointerPressed" Source="C:\Users\karol\Pictures\desktop backgrounds\planets-space-person-stars.jpg"></Image>
+        </Grid> -->
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="3" HorizontalAlignment="Center">
             <Button>B</Button>

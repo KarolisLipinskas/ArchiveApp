@@ -6,6 +6,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 
 namespace ArchiveApp;
@@ -19,6 +21,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     public ObservableCollection<string> Tabs { get; } = [InitialTab];
     private int _nextTabNo = 2;
     private const string InitialTab = "Tab1";
+    
     private bool _showMoreControls;
     public bool ShowMoreControls
     {
@@ -29,6 +32,69 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             OnPropertyChanged(nameof(ShowMoreControls));
         }
     }
+    
+    private IImage? _itemSource;
+    public IImage? ItemSource
+    {
+        get => _itemSource;
+        set
+        {
+            _itemSource = value;
+            OnPropertyChanged(nameof(ItemSource));
+        }
+    }
+
+    private bool _showItem;
+    public bool ShowItem
+    {
+        get => _showItem;
+        set
+        {
+            _showItem = value;
+            OnPropertyChanged(nameof(ShowItem));
+        }
+    }
+
+    private bool _imageVerticalScroll;
+    public bool ImageVerticalScroll
+    {
+        get => _imageVerticalScroll;
+        set
+        {
+            _imageVerticalScroll = value;
+            OnPropertyChanged(nameof(ImageVerticalScroll));
+        }
+    }
+    
+    private bool _imageHorizontalScroll;
+    public bool ImageHorizontalScroll
+    {
+        get => _imageHorizontalScroll;
+        set
+        {
+            _imageHorizontalScroll = value;
+            OnPropertyChanged(nameof(ImageHorizontalScroll));
+        }
+    }
+
+    private bool _imageScroll;
+    public bool ImageScroll
+    {
+        get => _imageScroll;
+        set
+        {
+            _imageScroll = value;
+            OnPropertyChanged(nameof(ImageScroll));
+        }
+    }
+
+    public ObservableCollection<Bitmap> Images { get; } =
+    [
+        new Bitmap(@"C:\Users\karol\Pictures\desktop backgrounds\planets-space-person-stars.jpg"),
+        new Bitmap(@"C:\Users\karol\Pictures\UbisoftConnect\Trackmania\Trackmania2021-9-7-23-35-54.jpg"),
+        new Bitmap(@"C:\Users\karol\Pictures\UbisoftConnect\Trackmania\Trackmania2022-1-6-22-29-56.jpg"),
+        new Bitmap(@"C:\Users\karol\Pictures\Simplanova 2024-10-03  (4).jpg")
+    ];
 
     public MainWindow()
     {
@@ -120,5 +186,15 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private void ClearDateToButton_OnClick(object? sender, RoutedEventArgs e)
     {
         ToDatePicker.Clear();
+    }
+
+    private void BackButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (ShowItem)
+        {
+            ItemSource = null;
+            ShowItem = false;
+            ViewsItemView.ZoomSlider.Value = 50.0;
+        }
     }
 }

@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:archiveApp="clr-namespace:ArchiveApp"
+             xmlns:views="clr-namespace:ArchiveApp.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ArchiveApp.Views.ItemView"
+             x:DataType="views:ItemView">
+    
+    <Grid>
+        <Image Margin="5" RenderOptions.BitmapInterpolationMode="HighQuality" 
+               IsVisible="{Binding !ImageScroll, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}"
+               Source="{Binding ItemSource, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
+        </Image>
+        
+        <ScrollViewer IsVisible="{Binding ImageVerticalScroll, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
+            <Image Name="VerticalImage" Margin="5" RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Width="{Binding ItemSource.Size.Width, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}"
+                   Source="{Binding ItemSource, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
+            </Image>
+        </ScrollViewer>
+        
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Disabled"
+                      IsVisible="{Binding ImageHorizontalScroll, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
+            <Image Name="HorizontalImage" Margin="5" RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Source="{Binding ItemSource, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
+            </Image>
+        </ScrollViewer>
+        
+        <Slider Name="ZoomSlider" Width="110" HorizontalAlignment="Right" Padding="0,0, 10, 0" Value="50"
+                IsVisible="{Binding ImageScroll, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}"
+                ValueChanged="ZoomSlider_OnValueChanged">
+        </Slider>
+    </Grid>
+</UserControl>
