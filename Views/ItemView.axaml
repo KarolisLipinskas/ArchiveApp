@@ -25,6 +25,7 @@
                       VerticalScrollBarVisibility="Disabled"
                       IsVisible="{Binding ImageHorizontalScroll, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
             <Image Name="HorizontalImage" Margin="5" RenderOptions.BitmapInterpolationMode="HighQuality"
+                   Height="{Binding ItemSource.Size.Height, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}"
                    Source="{Binding ItemSource, RelativeSource={RelativeSource AncestorType=archiveApp:MainWindow}}">
             </Image>
         </ScrollViewer>

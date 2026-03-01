@@ -58,27 +58,39 @@
             
             <ContentControl Grid.Row="1">
                 <Grid ShowGridLines="True" ColumnDefinitions="Auto, *">
-                    <Grid Grid.Column="0" ShowGridLines="True" RowDefinitions="Auto, Auto">
-                        <StackPanel Grid.Row="0" Margin="5">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox Name="Search" Width="150" Watermark="Search..."></TextBox>
-                                <Button>S</Button>
-                            </StackPanel>
-                            <Button Name="MoreControlsButton" Margin="0,5" Click="MoreControlsButton_OnClick" IsVisible="{Binding !ShowMoreControls}">More Controls</Button>
-                            <StackPanel IsVisible="{Binding ShowMoreControls}">
-                                <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
-                                    <Label>Date From</Label>
-                                    <DatePicker Name="FromDatePicker"></DatePicker>
-                                    <Button Name="ClearDateFromButton" Click="ClearDateFromButton_OnClick">x</Button>
-                                </StackPanel>
+                    <Grid Grid.Column="0" ShowGridLines="True" RowDefinitions="*, Auto">
+                        <ScrollViewer Grid.Row="0" FlowDirection="RightToLeft">
+                            <StackPanel Margin="5" FlowDirection="LeftToRight">
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Width="75">Date To</Label>
-                                    <DatePicker Name="ToDatePicker"></DatePicker>
-                                    <Button Name="ClearDateToButton" Click="ClearDateToButton_OnClick">x</Button>
+                                    <TextBox Name="Search" Width="150" Watermark="Search..."></TextBox>
+                                    <Button>S</Button>
                                 </StackPanel>
-                                <Button Name="HideControlsButton" Margin="0,5" Click="HideControlsButton_OnClick">Hide Controls</Button>
+                                <Button Name="MoreControlsButton" Margin="0,5" Click="MoreControlsButton_OnClick" IsVisible="{Binding !ShowMoreControls}">More Controls</Button>
+                                <StackPanel IsVisible="{Binding ShowMoreControls}">
+                                    <StackPanel Orientation="Horizontal" Margin="0, 5, 0, 0">
+                                        <Label>Date From</Label>
+                                        <DatePicker Name="FromDatePicker"></DatePicker>
+                                        <Button Name="ClearDateFromButton" Click="ClearDateFromButton_OnClick">x</Button>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Width="75">Date To</Label>
+                                        <DatePicker Name="ToDatePicker"></DatePicker>
+                                        <Button Name="ClearDateToButton" Click="ClearDateToButton_OnClick">x</Button>
+                                    </StackPanel>
+                                    <Button Name="HideControlsButton" Margin="0,5" Click="HideControlsButton_OnClick">Hide Controls</Button>
+                                </StackPanel>
+                                <StackPanel IsVisible="{Binding ShowItem}">
+                                    <Label FontWeight="Bold">Tags</Label>
+                                    <ItemsControl ItemsSource="{Binding Tags}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" Margin="10, 1, 0, 1"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
+                        </ScrollViewer>
                     </Grid>
                     <views:GalleryView Grid.Column="1" IsVisible="{Binding !ShowItem}"></views:GalleryView>
                     <views:ItemView Name="ViewsItemView" Grid.Column="1" IsVisible="{Binding ShowItem}"></views:ItemView>

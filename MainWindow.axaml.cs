@@ -95,6 +95,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         new Bitmap(@"C:\Users\karol\Pictures\UbisoftConnect\Trackmania\Trackmania2022-1-6-22-29-56.jpg"),
         new Bitmap(@"C:\Users\karol\Pictures\Simplanova 2024-10-03  (4).jpg")
     ];
+    
+    public ObservableCollection<string> Tags { get; } = ["Test1", "opa", "Test2", "OK", "Space", "hh", "mm", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
     public MainWindow()
     {
